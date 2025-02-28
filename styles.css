@@ -1,0 +1,256 @@
+:root {
+    --blood-red: #c62828;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    touch-action: none;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #111;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    touch-action: none;
+}
+
+canvas {
+    display: block;
+    border: 2px solid #333;
+    max-width: 100%;
+    max-height: 100vh;
+    touch-action: none;
+}
+
+#game-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    touch-action: none;
+}
+
+#ui-overlay {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: white;
+    font-size: min(16px, 4vw);
+    z-index: 10;
+    pointer-events: none;
+}
+
+#mobile-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    display: none; /* Hidden by default, shown for mobile */
+    justify-content: space-between;
+    z-index: 15;
+    pointer-events: none;
+}
+
+.control-zone {
+    width: 120px;
+    height: 120px;
+    position: relative;
+    margin: 0 20px;
+    touch-action: none;
+    pointer-events: auto;
+}
+
+.d-pad {
+    position: relative;
+}
+
+.d-pad-button {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.d-pad-up {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.d-pad-down {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.d-pad-left {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.d-pad-right {
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.fire-button {
+    width: 80px;
+    height: 80px;
+    background-color: rgba(198, 40, 40, 0.6);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+#pause-button-mobile {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    display: none; /* Hidden by default, shown for mobile */
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    z-index: 15;
+    touch-action: none;
+    pointer-events: auto;
+}
+
+#game-over-screen, #start-screen, #pause-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    font-size: min(24px, 5vw);
+    z-index: 20;
+    padding: 20px;
+    text-align: center;
+}
+
+button {
+    margin-top: 20px;
+    padding: min(10px, 3vw) min(20px, 5vw);
+    font-size: min(18px, 4vw);
+    background-color: var(--blood-red);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #e53935;
+}
+
+button:active {
+    background-color: #b71c1c;
+}
+
+#start-screen h1 {
+    color: var(--blood-red);
+    font-size: min(42px, 9vw);
+    text-shadow: 0 0 10px #ff0000;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#start-screen p {
+    text-align: center;
+    margin: 10px min(50px, 8vw);
+    font-size: min(16px, 4vw);
+}
+
+.blood {
+    color: var(--blood-red);
+}
+
+#wave-notification {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: var(--blood-red);
+    font-size: min(36px, 8vw);
+    padding: min(20px, 4vw) min(40px, 8vw);
+    border-radius: 10px;
+    text-align: center;
+    z-index: 15;
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+}
+
+/* Responsive adjustments for different screen sizes */
+@media (max-height: 600px) {
+    #mobile-controls .control-zone {
+        transform: scale(0.8);
+        margin: 0 10px;
+    }
+    
+    #pause-button-mobile {
+        transform: scale(0.8);
+    }
+}
+
+@media (max-height: 450px) {
+    #mobile-controls .control-zone {
+        transform: scale(0.6);
+        margin: 0 5px;
+    }
+    
+    #pause-button-mobile {
+        transform: scale(0.6);
+    }
+}
+
+/* Landscape-specific adjustments */
+@media (orientation: landscape) and (max-height: 500px) {
+    #mobile-controls {
+        bottom: 5px;
+    }
+    
+    #mobile-controls .control-zone {
+        transform: scale(0.6);
+    }
+}
