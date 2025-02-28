@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Zombie Horde Survivor</title>
+    <meta name="theme-color" content="#111111">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <!-- Load p5.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+    <!-- Load our CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="ui-overlay">
+            <div id="score">Score: 0</div>
+            <div id="health">Health: 100</div>
+            <div id="ammo">Ammo: 10</div>
+            <div id="wave">Wave: 1</div>
+            <div id="zombies-remaining" style="margin-top: 5px;">Zombies: 0/10</div>
+            <div id="pause-tip" style="margin-top: 10px; font-size: min(12px, 3vw); opacity: 0.7;">Press ESC to pause</div>
+        </div>
+        
+        <div id="mobile-controls">
+            <div class="control-zone d-pad">
+                <div class="d-pad-button d-pad-up" id="btn-up">↑</div>
+                <div class="d-pad-button d-pad-down" id="btn-down">↓</div>
+                <div class="d-pad-button d-pad-left" id="btn-left">←</div>
+                <div class="d-pad-button d-pad-right" id="btn-right">→</div>
+            </div>
+            <div class="control-zone">
+                <div class="fire-button" id="btn-fire">FIRE</div>
+            </div>
+        </div>
+        
+        <div id="pause-button-mobile">||</div>
+        
+        <div id="start-screen">
+            <h1>ZOMBIE HORDE SURVIVOR</h1>
+            <p>You're the last survivor in a city overrun by zombies.</p>
+            <div id="control-instructions">
+                <p>Use <span class="blood">W</span> to move forward, <span class="blood">S</span> to move backward, <span class="blood">A/D</span> to strafe, and <span class="blood">Mouse</span> to aim and shoot.</p>
+                <p>Press <span class="blood">ESC</span> to pause the game at any time.</p>
+            </div>
+            <p>Collect ammo packs and health kits to survive longer.</p>
+            <p>How long can you hold out against the endless horde?</p>
+            <button id="start-button">START GAME</button>
+        </div>
+        
+        <div id="game-over-screen" style="display: none;">
+            <h2>GAME OVER</h2>
+            <div id="final-score">Score: 0</div>
+            <div id="final-wave">Wave: 1</div>
+            <button id="restart-button">PLAY AGAIN</button>
+        </div>
+        
+        <div id="pause-screen" style="display: none;">
+            <h2>GAME PAUSED</h2>
+            <p>Press ESC to resume or click below</p>
+            <button id="resume-button">RESUME GAME</button>
+        </div>
+        
+        <div id="wave-notification" style="opacity: 0;">
+            <div>WAVE <span id="wave-number">1</span></div>
+            <div style="font-size: min(24px, 5vw); margin-top: 10px;">Get ready!</div>
+        </div>
+    </div>
+
+    <!-- Game scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/entities/player.js"></script>
+    <script src="js/entities/zombie.js"></script>
+    <script src="js/entities/bullet.js"></script>
+    <script src="js/entities/particle.js"></script>
+    <script src="js/entities/powerup.js"></script>
+    <script src="js/mechanics.js"></script>
+    <script src="js/controls.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
